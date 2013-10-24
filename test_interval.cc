@@ -7,6 +7,27 @@
 #include "./IntervalList.h"
 #include "./SteveAssert.h"
 
+void IL_AdditionalTests() {
+  IntervalList test_iv;
+
+  // Make sure our boundary cases are OK.
+  test_iv.AddInterval(IntervalList::Interval(1.0, 2.0));
+  SteveAssert(1 == test_iv.Find(1.0).size());
+  SteveAssert(1 == test_iv.Find(2.0).size());
+  SteveAssert(0 == test_iv.Find(0.99999).size());
+
+  // Make sure we can add, then delete, overlapping intervals.
+  test_iv.AddInterval(IntervalList::Interval(1.0, 2.0));
+  SteveAssert(2 == test_iv.size());
+  SteveAssert(2 == test_iv.Find(1.0).size());
+  SteveAssert(true ==
+              test_iv.RemoveInterval(IntervalList::Interval(1.0, 2.0)));
+  SteveAssert(true ==
+              test_iv.RemoveInterval(IntervalList::Interval(1.0, 2.0)));
+  SteveAssert(false ==
+              test_iv.RemoveInterval(IntervalList::Interval(1.0, 2.0)));
+}
+
 void IL_SimpleTest() {
   IntervalList test_iv;
 
@@ -47,5 +68,6 @@ void IL_SimpleTest() {
 
 int main(int argc, char **argv) {
   IL_SimpleTest();
+  IL_AdditionalTests();
   return EXIT_SUCCESS;
 }
