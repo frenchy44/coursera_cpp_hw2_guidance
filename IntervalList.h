@@ -15,12 +15,20 @@ class IntervalList {
   // variables as public, but it's fine for now.
   class Interval {
    public:
-    Interval(double s, double e) : start(s), end(e) { }
+    Interval(double s, double e) : start_(s), end_(e) { }
 
+    // Accessors and mutators.
+    void set_start(double start) { start_ = start; }
+    double start(void) const { return start_; }
+    void set_end(double end) { end_ = end; }
+    double end(void) const { return end_; }
+
+    // Compares two Intervals for equality.
     bool operator==(const Interval &rhs) const;
 
-    double start; // the start of the interval
-    double end;   // the end of the interval
+   private:
+    double start_; // the start of the interval
+    double end_;   // the end of the interval
   };
 
   IntervalList() { }

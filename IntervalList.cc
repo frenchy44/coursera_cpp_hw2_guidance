@@ -4,7 +4,7 @@
 
 bool IntervalList::Interval::operator==(
   const IntervalList::Interval &rhs) const {
-  return ((start == rhs.start) && (end == rhs.end));
+  return ((start_ == rhs.start_) && (end_ == rhs.end_));
 }
 
 int IntervalList::size(void) const {
@@ -28,7 +28,7 @@ bool IntervalList::RemoveInterval(const Interval &remove_me) {
 std::list<IntervalList::Interval> IntervalList::Find(double find_me) const {
   std::list<IntervalList::Interval> retlist;
   for (const auto &ival : intervals_) {
-    if ((find_me >= ival.start) && (find_me <= ival.end)) {
+    if ((find_me >= ival.start()) && (find_me <= ival.end())) {
       retlist.push_back(ival);
     }
   }
@@ -39,7 +39,7 @@ std::list<IntervalList::Interval> IntervalList::Find(double find_me) const {
 // prettyprint an IntervalList and an Interval to streams
 std::ostream& operator<<(std::ostream &os,
                          const IntervalList::Interval &ival) {
-  os << "(" << ival.start << "," << ival.end << ")";
+  os << "(" << ival.start() << "," << ival.end() << ")";
   return os;
 }
 
