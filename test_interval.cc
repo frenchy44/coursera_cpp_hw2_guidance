@@ -2,10 +2,32 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <list>
 #include <string.h>
 
 #include "./IntervalList.h"
 #include "./SteveAssert.h"
+
+void IL_RandomGeneratorTests() {
+  // Generate a few random interval lists, and test them for
+  // correctness.
+  for (unsigned int i = 0; i < 100; ++i) {
+    IntervalList il = IntervalList::GenerateRandom(i, 0.0, 10.0);
+    SteveAssert(i == il.size());
+
+    std::list<IntervalList::Interval> ilist = il.Find(-1);
+    SteveAssert(0 == ilist.size());
+
+    ilist = il.Find(0.5);
+    for (const auto &intj : ilist) {
+      SteveAssert(intj.start() <= intj.end());
+      SteveAssert(0.0 <= intj.start());
+      SteveAssert(10.0 > intj.start());
+      SteveAssert(0.0 <= intj.end());
+      SteveAssert(10.0 > intj.end());
+    }
+  }
+}
 
 void IL_AdditionalTests() {
   IntervalList test_iv;
@@ -69,5 +91,6 @@ void IL_SimpleTest() {
 int main(int argc, char **argv) {
   IL_SimpleTest();
   IL_AdditionalTests();
+  IL_RandomGeneratorTests();
   return EXIT_SUCCESS;
 }

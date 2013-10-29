@@ -34,6 +34,13 @@ class IntervalList {
   IntervalList() { }
   virtual ~IntervalList() { }
 
+  // A factory for generating random IntervalLists. Exactly
+  // "num_intervals" random intervals are generated, with each
+  // interval's endpoints uniformly drawn from the range [range_start,
+  // range_end).
+  static IntervalList GenerateRandom(unsigned int num_intervals,
+                                     double range_start, double range_end);
+
   // Returns the number of Intervals in the IntervalList.
   int size(void) const;
 
