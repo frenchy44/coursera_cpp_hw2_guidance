@@ -11,7 +11,7 @@
 void IL_RandomGeneratorTests() {
   // Generate a few random interval lists, and test them for
   // correctness.
-  for (unsigned int i = 0; i < 100; ++i) {
+  for (auto i = 0; i < 100; ++i) {
     IntervalList il = IntervalList::GenerateRandom(i, 0.0, 10.0);
     SteveAssert(i == il.size());
 

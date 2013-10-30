@@ -13,9 +13,9 @@ IntervalList IntervalList::GenerateRandom(unsigned int num_intervals,
   std::default_random_engine re(rd());
   std::uniform_real_distribution<double> intervalrand(range_start, range_end);
 
-  // Generate the random intervals and add them to the list.
+  // Generate thef random intervals and add them to the list.
   IntervalList retlist;
-  for (auto i = 0; i < num_intervals; ++i) {
+  for (auto i = 0U; i < num_intervals; ++i) {
     double r1 = intervalrand(re);
     double r2 = intervalrand(re);
     if (r1 > r2) {
